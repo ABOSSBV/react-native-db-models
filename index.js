@@ -103,7 +103,7 @@ RNDBModel.createDB = function(db) {
    * @param replace_data
    * @param callback
    */
-  me.updateId = function(id, replaceData) {
+  this.updateId = function(id, replaceData) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
       return collection.updateById(id, replaceData);
     });
