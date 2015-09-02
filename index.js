@@ -14,13 +14,9 @@ RNDBModel.createDB = function(db) {
    * @param query_data
    * @param callback
    */
-  this.get = function(queryData, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      var results = collection.where(queryData).find();
-
-      if (callback) {
-        callback(results);
-      }
+  this.get = function(queryData) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.where(queryData).find();
     });
   };
 
@@ -29,13 +25,9 @@ RNDBModel.createDB = function(db) {
    * @param id
    * @param callback
    */
-  this.getId = function(id, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      var results = collection.get(id);
-
-      if (callback) {
-        callback(results);
-      }
+  this.getId = function(id) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.get(id);
     });
   };
 
@@ -43,13 +35,9 @@ RNDBModel.createDB = function(db) {
    * @description Gets all the data of the table
    * @param callback
    */
-  this.getAll = function(callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      var results = collection.databaseData[_this.dbName];
-
-      if (callback) {
-        callback(results);
-      }
+  this.getAll = function() {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.databaseData[_this.dbName];
     });
   };
 
@@ -58,16 +46,10 @@ RNDBModel.createDB = function(db) {
    * @param data_to_add
    * @param callback
    */
-  this.add = function(dataToAdd, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
+  this.add = function(dataToAdd) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
       // Add Data
-      collection.add(dataToAdd, function(addedDataId) {
-        if (callback) {
-          callback(addedDataId);
-        }
-
-        RNDBModel.DBEvents.emit('all');
-      });
+      return collection.add(dataToAdd);
     });
   };
 
@@ -76,13 +58,9 @@ RNDBModel.createDB = function(db) {
    * @param query_data
    * @param callback
    */
-  this.remove = function(queryData, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      collection.where(queryData).remove(function(dataRemoved) {
-        if (callback) {
-          callback(dataRemoved);
-        }
-      });
+  this.remove = function(queryData) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.where(queryData).remove();
     });
   };
 
@@ -91,15 +69,9 @@ RNDBModel.createDB = function(db) {
    * @param id
    * @param callback
    */
-  this.removeId = function(id, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      collection.removeById(id, function(dataRemoved) {
-        if (callback) {
-          callback(dataRemoved);
-        }
-
-        RNDBModel.DBEvents.emit('all');
-      });
+  this.removeId = function(id) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.removeById(id);
     });
   };
 
@@ -107,15 +79,9 @@ RNDBModel.createDB = function(db) {
    * @description Erases the complete DB
    * @param callback
    */
-  this.eraseDb = function(callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      collection.remove(function(dataRemoved) {
-        if (callback) {
-          callback(dataRemoved);
-        }
-
-        RNDBModel.DBEvents.emit('all');
-      });
+  this.eraseDb = function() {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.remove();
     });
   };
 
@@ -125,15 +91,9 @@ RNDBModel.createDB = function(db) {
    * @param replace_data
    * @param callback
    */
-  this.update = function(queryData, replaceData, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      collection.where(queryData).update(replaceData, function(data) {
-        if (callback) {
-          callback(data);
-        }
-
-        RNDBModel.DBEvents.emit('all');
-      });
+  this.update = function(queryData, replaceData) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.where(queryData).update(replaceData);
     });
   };
 
@@ -143,15 +103,9 @@ RNDBModel.createDB = function(db) {
    * @param replace_data
    * @param callback
    */
-  me.updateId = function(id, replaceData, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      collection.updateById(id, replaceData, function(data) {
-        if (callback) {
-          callback(data);
-        }
-
-        RNDBModel.DBEvents.emit('all');
-      });
+  me.updateId = function(id, replaceData) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.updateById(id, replaceData);
     });
   };
 
@@ -160,15 +114,9 @@ RNDBModel.createDB = function(db) {
    * @param id
    * @param callback
    */
-  this.removeId = function(id, callback) {
-    ReactNativeStore.table(_this.dbName).then(function(collection) {
-      collection.removeById(id, function(dataRemoved) {
-        if (callback) {
-          callback(dataRemoved);
-        }
-
-        RNDBModel.DBEvents.emit('all');
-      });
+  this.removeId = function(id) {
+    return ReactNativeStore.table(_this.dbName).then(function(collection) {
+      return collection.removeById(id);
     });
   };
 };

@@ -141,34 +141,22 @@ Model.prototype.update = function(data, callback) {
       }
     }
 
-    reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]).then(function(data) {
-      if (callback) {
-        callback(data);
-      }
-    }, function(err) {
-
-      if (callback) {
-        callback(err);
-      }
-    });
-
     this.init();
+    return reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]);
   } else {
-    if (callback) {
-      callback(null);
-    }
+    return null;
   }
 };
 
-Model.prototype.updateById = function(id, data, callback) {
+Model.prototype.updateById = function(id, data) {
   this.where({
     _id: id,
   });
 
-  return this.update(data, callback);
+  return this.update(data);
 };
 
-Model.prototype.remove = function(callback) {
+Model.prototype.remove = function() {
   var results = [];
   var rows = this.databaseData[this.tableName]['rows'];
   var deletedIds = [];
@@ -207,28 +195,10 @@ Model.prototype.remove = function(callback) {
 
   this.init();
 
-  if (counter === deletedIds.length && callback) {
-    reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]).then(function(data) {
-      if (callback) {
-        var returnData = {
-          results: data,
-          deletedIds: deletedIds,
-        };
-        callback(returnData);
-      }
-    }, function(err) {
-
-      results.push(err);
-      if (callback) {
-        var returnData = {
-          error: err,
-          deletedIds: deletedIds,
-        };
-        callback(returnData);
-      }
-    });
+  if (counter === deletedIds.length) {
+    reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]);
   } else if (callback && deletedIds.length === 0) {
-    callback(null);
+    return null;
   }
 };
 
@@ -237,27 +207,18 @@ Model.prototype.removeById = function(id, callback) {
     _id: id,
   });
 
-  return this.remove(callback);
+  return this.remove();
 };
 
-Model.prototype.add = function(data, callback) {
+Model.prototype.add = function(data) {
   var autoinc = this.databaseData[this.tableName].autoinc;
   data._id = autoinc;
   this.databaseData[this.tableName].rows[autoinc] = data;
   this.databaseData[this.tableName].autoinc += 1;
   this.databaseData[this.tableName].totalrows += 1;
-  reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]).then(function(addedData) {
-    if (callback) {
-      callback(data);
-    }
-  }, function(err) {
-    
-    if (callback) {
-      callback(err);
-    }
-  });
 
   this.init();
+  return reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]);
 };
 
 Model.prototype.get = function(id) {
