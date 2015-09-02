@@ -4,7 +4,7 @@ window.Env = {};
 jest.dontMock('../index');
 
 describe('db_model', function() {
-    it('checks if DB is created', function() {
-        true
-    });
+  it('checks if DB is created', function() {
+    true
+  });
 });
