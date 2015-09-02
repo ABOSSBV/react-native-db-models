@@ -55,7 +55,7 @@ reactNativeStore.saveTable = function(tableName, tableData) {
 reactNativeStore.table = function(tableName) {
   var _this = this;
   return new Promise(function(resolve, reject) {
-    return self.getItem(dbName).then(function(databaseData) {
+    return _this.getItem(dbName).then(function(databaseData) {
       if (!databaseData) {
         _this.createDataBase().then(function() {
           _this.saveTable(tableName).then(function(databaseData) {
