@@ -246,11 +246,12 @@ Model.prototype.add = function(data, callback) {
   this.databaseData[this.tableName].rows[autoinc] = data;
   this.databaseData[this.tableName].autoinc += 1;
   this.databaseData[this.tableName].totalrows += 1;
-  reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]).then(function(added_data) {
+  reactNativeStore.saveTable(this.tableName, this.databaseData[this.tableName]).then(function(addedData) {
     if (callback) {
       callback(data);
     }
   }, function(err) {
+    
     if (callback) {
       callback(err);
     }
