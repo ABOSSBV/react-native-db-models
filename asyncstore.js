@@ -260,6 +260,10 @@ Model.prototype.find = function() {
     }
   }
 
+  if (results.length === 0) {
+    return null;
+  }
+
   if (typeof this._limit == 'number') {
     return results.slice(this._offset, this._limit + this._offset);
   } else {
