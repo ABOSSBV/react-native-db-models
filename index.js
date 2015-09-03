@@ -12,7 +12,6 @@ RNDBModel.createDB = function(db) {
   /**
    * @description Finds all the objects based on the query
    * @param query_data
-   * @param callback
    */
   this.get = function(queryData) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -23,7 +22,6 @@ RNDBModel.createDB = function(db) {
   /**
    * @description Finds by ID
    * @param id
-   * @param callback
    */
   this.getId = function(id) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -33,7 +31,6 @@ RNDBModel.createDB = function(db) {
 
   /**
    * @description Gets all the data of the table
-   * @param callback
    */
   this.getAll = function() {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -44,7 +41,6 @@ RNDBModel.createDB = function(db) {
   /**
    * @description Adds data to the Table in the DB
    * @param data_to_add
-   * @param callback
    */
   this.add = function(dataToAdd) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -56,7 +52,6 @@ RNDBModel.createDB = function(db) {
   /**
    * @description Removes all the objects matching the query
    * @param query_data
-   * @param callback
    */
   this.remove = function(queryData) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -67,7 +62,6 @@ RNDBModel.createDB = function(db) {
   /**
    * @description Removed object by ID
    * @param id
-   * @param callback
    */
   this.removeId = function(id) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -77,7 +71,6 @@ RNDBModel.createDB = function(db) {
 
   /**
    * @description Erases the complete DB
-   * @param callback
    */
   this.eraseDb = function() {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -89,7 +82,6 @@ RNDBModel.createDB = function(db) {
    * @description Updates the Table with the query
    * @param query_data
    * @param replace_data
-   * @param callback
    */
   this.update = function(queryData, replaceData) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -101,7 +93,6 @@ RNDBModel.createDB = function(db) {
    * @description Updates the DB Object by ID
    * @param id
    * @param replace_data
-   * @param callback
    */
   this.updateId = function(id, replaceData) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
@@ -112,7 +103,6 @@ RNDBModel.createDB = function(db) {
   /**
    * @description Removed object by ID
    * @param id
-   * @param callback
    */
   this.removeId = function(id) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
