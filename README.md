@@ -90,13 +90,13 @@ DB.users.get({firstName: "Rishabh"}, function(results){
 ----------
 **getId**
 
-> **getId(id, callback)**
+> **getId(id)**
 > id: ID of the object to be fetched.
 
 Example
 ```
-DB.users.getId(10, function(results){
-	console.log(results);
+DB.users.getId(10, function(result){
+	console.log(result);
 });
 ```
 

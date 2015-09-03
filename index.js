@@ -25,7 +25,14 @@ RNDBModel.createDB = function(db) {
    */
   this.getId = function(id) {
     return ReactNativeStore.table(_this.dbName).then(function(collection) {
-      return collection.get(id);
+      var item = collection.get(id);
+
+      if (item && item.length === 1) {
+        /* only one item should be returned, because it is matched on ID */
+        return item[0];
+      } else {
+        return item;
+      }
     });
   };
 
